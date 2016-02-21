@@ -33,7 +33,11 @@ ENV           FFMPEG_VERSION=2.8.6 \
 
 # See https://github.com/jrottenberg/ffmpeg/blob/master/run.sh
 COPY          run.sh /tmp/run.sh
+RUN           /tmp/run.sh 
 
-RUN           /tmp/run.sh && ffmpeg -buildconf
+COPY          build-ffmpeg.sh /tmp/build-ffmpeg.sh
+RUN           /tmp/build-ffmpeg.sh && ffmpeg -buildconf
+COPY          libDeckLinkAPI.so /usr/lib/libDeckLinkAPI.so
+RUN           ls -l /lib/libDeck* && ls -l /usr/lib/libDeck* && ldconfig
 # Let's make sure the app built correctly
 # Convenient to verify on https://hub.docker.com/r/jrottenberg/ffmpeg/builds/ console output
