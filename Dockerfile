@@ -27,7 +27,8 @@ ENV           FFMPEG_VERSION=2.8.6 \
               VPX_VERSION=1.5.0    \
               XVID_VERSION=1.3.4   \
               FDKAAC_VERSION=0.1.4 \
-              X265_VERSION=1.9
+              X265_VERSION=1.9     \
+              DECKLINK_SDK_VERSION=10.4.3
 
 
 # See https://github.com/jrottenberg/ffmpeg/blob/master/run.sh
