@@ -8,7 +8,7 @@ export MAKEFLAGS="-j$[$(nproc) + 1]"
 export SRC=/usr/local
 export PKG_CONFIG_PATH=${SRC}/lib/pkgconfig
 
-yum install -y autoconf automake gcc gcc-c++ git libtool make nasm zlib-devel openssl-devel tar cmake perl which bzip2
+yum install -y autoconf automake gcc gcc-c++ git libtool make nasm zlib-devel openssl-devel tar cmake perl which bzip2 unzip
 
 # yasm
 DIR=$(mktemp -d) && cd ${DIR} && \
@@ -139,6 +139,8 @@ DIR=$(mktemp -d) && cd ${DIR} && \
 
 # ffmpeg
 DIR=$(mktemp -d) && cd ${DIR} && \
+              curl -sL http://s3.fluxmedia.at/Blackmagic_DeckLink_SDK_10.4.3.zip -O Blackmagic_DeckLink_SDK_10.4.3.zip && \
+              unzip Blackmagic_DeckLink_SDK_10.4.3.zip && \ 
               curl -s http://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.gz | tar zxvf - -C . && \
               cd ffmpeg-${FFMPEG_VERSION} && \
               ./configure --prefix="${SRC}" --extra-cflags="-I${SRC}/include" \
@@ -147,7 +149,8 @@ DIR=$(mktemp -d) && cd ${DIR} && \
               --enable-libx264 --enable-libxvid --enable-gpl \
               --enable-postproc --enable-nonfree --enable-avresample --enable-libfdk_aac \
               --disable-debug --enable-small --enable-openssl --enable-libtheora \
-              --enable-libx265 --enable-libopus --enable-libvorbis --enable-libvpx && \
+              --enable-libx265 --enable-libopus --enable-libvorbis --enable-libvpx \
+              --enable-decklink --extra-cflags="-I$(DIR)/Blackmagic\ Decklink\ SDK\ 10.4.3/Linux/include" && \
               make && \
               make install && \
               make distclean && \
