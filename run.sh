@@ -150,7 +150,7 @@ DIR=$(mktemp -d) && cd ${DIR} && \
               --enable-postproc --enable-nonfree --enable-avresample --enable-libfdk_aac \
               --disable-debug --enable-small --enable-openssl --enable-libtheora \
               --enable-libx265 --enable-libopus --enable-libvorbis --enable-libvpx \
-              --enable-decklink --extra-cflags="-I${DIR}/Blackmagic\ Decklink\ SDK\ 10.4.3/Linux/include" && \
+              --enable-decklink --extra-cflags="-I${DIR}/Blackmagic Decklink SDK 10.4.3/Linux/include" && \
               make && \
               make install && \
               make distclean && \
